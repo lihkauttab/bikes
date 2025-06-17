@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>XML Generator</title>
+    <script>
+        function generateXML() {
+            // Create XML structure
+            const xmlString = `<?xml version="1.0" encoding="UTF-8"?>
+<note>
+    <to>${document.getElementById('to').value}</to>
+    <from>${document.getElementById('from').value}</from>
+    <heading>${document.getElementById('heading').value}</heading>
+    <body>${document.getElementById('body').value}</body>
+</note>`;
+            
+            // Create download link
+            const blob = new Blob([xmlString], {type: 'application/xml'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'generated.xml';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
+</head>
+<body>
+    <h1>XML Generator</h1>
+    <form>
+        <label for="to">To:</label><br>
+        <input type="text" id="to" name="to"><br>
+        
+        <label for="from">From:</label><br>
+        <input type="text" id="from" name="from"><br>
+        
+        <label for="heading">Heading:</label><br>
+        <input type="text" id="heading" name="heading"><br>
+        
+        <label for="body">Body:</label><br>
+        <textarea id="body" name="body"></textarea><br><br>
+        
+        <button type="button" onclick="generateXML()">Generate XML</button>
+    </form>
+</body>
+</html>
